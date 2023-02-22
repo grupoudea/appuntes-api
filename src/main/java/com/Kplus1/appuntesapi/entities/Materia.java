@@ -29,7 +29,7 @@ public class Materia {
     private Estudiante estudiante;
 
     @Column(name = "creditos", nullable = false)
-    private Boolean creditos;
+    private Integer creditos;
 
     @Column(name = "profesor", nullable = false)
     private String profesor;

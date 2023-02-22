@@ -4,10 +4,7 @@ import com.Kplus1.appuntesapi.dtos.MateriaDto;
 import com.Kplus1.appuntesapi.services.MateriaService;
 import com.Kplus1.appuntesapi.utils.StandardResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/materias")
@@ -20,7 +17,12 @@ public class MateriaController {
     }
 
     @PostMapping("/guardar-materia")
-    public ResponseEntity<StandardResponse<MateriaDto>> saveGrades(@RequestBody MateriaDto materia) {
+    public ResponseEntity<StandardResponse<MateriaDto>> crearMateria(@RequestBody MateriaDto materia) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.crearMateria(materia)));
+    }
+
+    @PutMapping("/editar-materia")
+    public ResponseEntity<StandardResponse<MateriaDto>> editarMateria(@RequestBody MateriaDto materia) {
+        return ResponseEntity.ok(new StandardResponse<>(materiaService.editarMateria(materia)));
     }
 }

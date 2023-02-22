@@ -1,6 +1,7 @@
 package com.Kplus1.appuntesapi.services;
 
 import com.Kplus1.appuntesapi.dtos.MateriaDto;
+import com.Kplus1.appuntesapi.entities.Materia;
 import com.Kplus1.appuntesapi.mappers.MateriaMapper;
 import com.Kplus1.appuntesapi.repositories.MateriaRepository;
 import org.hibernate.ObjectNotFoundException;
@@ -26,5 +27,24 @@ public class MateriaService {
             throw new ObjectNotFoundException(null, "Faltan campos requeridos");
         }
         return materiaMapper.toDto(materiaRepository.save(materiaMapper.toEntity(materia)));
+    }
+
+    public MateriaDto editarMateria(MateriaDto materiaDto) {
+        if (Objects.isNull(materiaDto) || Objects.isNull(materiaDto.getId())) {
+            throw new ObjectNotFoundException(null, "Faltan campos requeridos");
+        }
+        Materia materia = buscarMateria(materiaDto.getId());
+        materia.setIdMateriaFk(materiaDto.getIdMateriaFk());
+        materia.setIdEstudianteFk(materiaDto.getIdEstudianteFk());
+        materia.setCreditos(materiaDto.getCreditos());
+        materia.setProfesor(materiaDto.getProfesor());
+        return materiaMapper.toDto(materiaRepository.save(materia));
+    }
+
+    public Materia buscarMateria(Integer materiaId) {
+        if (Objects.isNull(materiaId)) {
+            throw new ObjectNotFoundException(null, "Faltan campos requeridos");
+        }
+        return materiaRepository.findById(materiaId).orElse(null);
     }
 }

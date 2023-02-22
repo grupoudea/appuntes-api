@@ -9,6 +9,6 @@ public class MateriaDto {
     private MateriaUniversidadDto materiaUniversidad;
     private Integer idEstudianteFk;
     private EstudianteDto estudiante;
-    private Boolean creditos;
+    private Integer creditos;
     private String profesor;
 }
