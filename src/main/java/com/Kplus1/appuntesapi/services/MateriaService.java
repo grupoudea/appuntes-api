@@ -8,6 +8,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -46,5 +47,9 @@ public class MateriaService {
             throw new ObjectNotFoundException(null, "Faltan campos requeridos");
         }
         return materiaRepository.findById(materiaId).orElse(null);
+    }
+
+    public List<MateriaDto> buscarMateriasPorFiltro(String busqueda, Integer idEstudiante) {
+        return materiaMapper.toDto(materiaRepository.filtrarMaterias(busqueda, idEstudiante));
     }
 }

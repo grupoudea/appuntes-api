@@ -6,6 +6,8 @@ import com.Kplus1.appuntesapi.utils.StandardResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/materias")
 public class MateriaController {
@@ -24,5 +26,11 @@ public class MateriaController {
     @PutMapping("/editar-materia")
     public ResponseEntity<StandardResponse<MateriaDto>> editarMateria(@RequestBody MateriaDto materia) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.editarMateria(materia)));
+    }
+
+    @GetMapping("/filtro-materias")
+    public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam("busqueda") String busqueda,
+                                                                                      @RequestParam("idEstudiante") Integer idEstudiante) {
+        return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasPorFiltro(busqueda, idEstudiante)));
     }
 }
