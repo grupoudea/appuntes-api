@@ -1,9 +1,12 @@
 package com.Kplus1.appuntesapi.services;
 
 import com.Kplus1.appuntesapi.dtos.MateriaDto;
+import com.Kplus1.appuntesapi.dtos.MateriaUniversidadDto;
 import com.Kplus1.appuntesapi.entities.Materia;
 import com.Kplus1.appuntesapi.mappers.MateriaMapper;
+import com.Kplus1.appuntesapi.mappers.MateriaUniversidadMapper;
 import com.Kplus1.appuntesapi.repositories.MateriaRepository;
+import com.Kplus1.appuntesapi.repositories.MateriaUniversidadRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,14 @@ public class MateriaService {
 
     private final MateriaRepository materiaRepository;
     private final MateriaMapper materiaMapper;
+    private final MateriaUniversidadRepository materiaUniversidadRepository;
+    private final MateriaUniversidadMapper materiaUniversidadMapper;
 
-    public MateriaService(MateriaRepository materiaRepository, MateriaMapper materiaMapper) {
+    public MateriaService(MateriaRepository materiaRepository, MateriaMapper materiaMapper, MateriaUniversidadRepository materiaUniversidadRepository, MateriaUniversidadMapper materiaUniversidadMapper) {
         this.materiaRepository = materiaRepository;
         this.materiaMapper = materiaMapper;
+        this.materiaUniversidadRepository = materiaUniversidadRepository;
+        this.materiaUniversidadMapper = materiaUniversidadMapper;
     }
 
     public MateriaDto crearMateria(MateriaDto materia) {
@@ -51,5 +58,9 @@ public class MateriaService {
 
     public List<MateriaDto> buscarMateriasPorFiltro(String busqueda, Integer idEstudiante) {
         return materiaMapper.toDto(materiaRepository.filtrarMaterias(busqueda, idEstudiante));
+    }
+
+    public List<MateriaUniversidadDto> buscarMateriasUniversidad(String materia) {
+        return materiaUniversidadMapper.toDto(materiaUniversidadRepository.findAllByMateriaContains(materia));
     }
 }

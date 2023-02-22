@@ -1,6 +1,7 @@
 package com.Kplus1.appuntesapi.controllers;
 
 import com.Kplus1.appuntesapi.dtos.MateriaDto;
+import com.Kplus1.appuntesapi.dtos.MateriaUniversidadDto;
 import com.Kplus1.appuntesapi.services.MateriaService;
 import com.Kplus1.appuntesapi.utils.StandardResponse;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,10 @@ public class MateriaController {
     public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam("busqueda") String busqueda,
                                                                                       @RequestParam("idEstudiante") Integer idEstudiante) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasPorFiltro(busqueda, idEstudiante)));
+    }
+
+    @GetMapping("/filtro-materias-universidad")
+    public ResponseEntity<StandardResponse<List<MateriaUniversidadDto>>> buscarMateriasUniversidad(@RequestParam("materia") String materia) {
+        return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasUniversidad(materia)));
     }
 }
