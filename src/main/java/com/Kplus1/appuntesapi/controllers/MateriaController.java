@@ -39,4 +39,10 @@ public class MateriaController {
     public ResponseEntity<StandardResponse<List<MateriaUniversidadDto>>> buscarMateriasUniversidad(@RequestParam("materia") String materia) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasUniversidad(materia)));
     }
+
+    @DeleteMapping("/eliminar-materia-con-apuntes/{idMateria}")
+    public ResponseEntity<StandardResponse<Void>> deleteSubjectWithGrades(@PathVariable("idMateria") Integer idMateria) {
+        materiaService.eliminarMateria(idMateria);
+        return ResponseEntity.ok(new StandardResponse<>());
+    }
 }

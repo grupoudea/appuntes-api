@@ -63,4 +63,9 @@ public class MateriaService {
     public List<MateriaUniversidadDto> buscarMateriasUniversidad(String materia) {
         return materiaUniversidadMapper.toDto(materiaUniversidadRepository.findAllByMateriaContains(materia));
     }
+
+    public void eliminarMateria(Integer idMateria) {
+        Materia materia = buscarMateria(idMateria);
+        materiaRepository.delete(materia);
+    }
 }
