@@ -30,7 +30,7 @@ public class MateriaController {
     }
 
     @GetMapping("/filtro-materias")
-    public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam("busqueda") String busqueda,
+    public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
                                                                                       @RequestParam("idEstudiante") Integer idEstudiante) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasPorFiltro(busqueda, idEstudiante)));
     }

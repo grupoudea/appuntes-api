@@ -57,6 +57,9 @@ public class MateriaService {
     }
 
     public List<MateriaDto> buscarMateriasPorFiltro(String busqueda, Integer idEstudiante) {
+        if (Objects.isNull(busqueda)) {
+            busqueda = "";
+        }
         return materiaMapper.toDto(materiaRepository.filtrarMaterias(busqueda, idEstudiante));
     }
 
