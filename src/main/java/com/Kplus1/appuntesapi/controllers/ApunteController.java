@@ -4,10 +4,7 @@ import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
 import com.Kplus1.appuntesapi.services.ApunteService;
 import com.Kplus1.appuntesapi.utils.StandardResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,11 @@ public class ApunteController {
                                                                                                @RequestParam("idMateria") Integer idMateria,
                                                                                                @RequestParam("idEstudiante") Integer idEstudiante) {
         return ResponseEntity.ok(new StandardResponse<>(apunteService.buscarGruposApuntesPorFiltro(busqueda, idMateria, idEstudiante)));
+    }
+
+    @DeleteMapping("/eliminar-apunte/{idApunte}")
+    public ResponseEntity<StandardResponse<Void>> elminarApunte(@PathVariable("idApunte") Integer idApunte) {
+        apunteService.eliminarApunte(idApunte);
+        return ResponseEntity.ok(new StandardResponse<>());
     }
 }

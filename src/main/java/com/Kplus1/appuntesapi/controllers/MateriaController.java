@@ -41,7 +41,7 @@ public class MateriaController {
     }
 
     @DeleteMapping("/eliminar-materia-con-apuntes/{idMateria}")
-    public ResponseEntity<StandardResponse<Void>> deleteSubjectWithGrades(@PathVariable("idMateria") Integer idMateria) {
+    public ResponseEntity<StandardResponse<Void>> eliminarMateriaConApuntes(@PathVariable("idMateria") Integer idMateria) {
         materiaService.eliminarMateria(idMateria);
         return ResponseEntity.ok(new StandardResponse<>());
     }
