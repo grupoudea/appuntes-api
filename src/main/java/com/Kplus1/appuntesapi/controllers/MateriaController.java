@@ -35,6 +35,11 @@ public class MateriaController {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasPorFiltro(busqueda, idEstudiante)));
     }
 
+    @GetMapping("/obtener-materias/{idEstudiante}")
+    public ResponseEntity<StandardResponse<List<MateriaDto>>> obtenerMaterias(@PathVariable("idEstudiante") Integer idEstudiante) {
+        return ResponseEntity.ok(new StandardResponse<>(materiaService.obtenerMateriasPorIdEstudiante(idEstudiante)));
+    }
+
     @GetMapping("/filtro-materias-universidad")
     public ResponseEntity<StandardResponse<List<MateriaUniversidadDto>>> buscarMateriasUniversidad(@RequestParam("materia") String materia) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasUniversidad(materia)));

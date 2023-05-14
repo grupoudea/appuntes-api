@@ -60,6 +60,10 @@ public class MateriaService {
         return materiaMapper.toDto(materiaRepository.filtrarMaterias(busqueda, idEstudiante));
     }
 
+    public List<MateriaDto> obtenerMateriasPorIdEstudiante(Integer idEstudiante) {
+        return materiaMapper.toDto(materiaRepository.findMateriaByIdEstudianteFk(idEstudiante));
+    }
+
     public List<MateriaUniversidadDto> buscarMateriasUniversidad(String materia) {
         return materiaUniversidadMapper.toDto(materiaUniversidadRepository.findAllByMateriaContains(materia));
     }

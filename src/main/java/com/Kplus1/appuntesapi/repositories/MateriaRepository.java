@@ -18,4 +18,6 @@ public interface MateriaRepository extends JpaRepository<Materia, Integer> {
             "AND ((m.profesor LIKE concat('%', :busqueda, '%')) " +
             "OR (mu.materia LIKE concat('%', :busqueda, '%'))) ")
     List<Materia> filtrarMaterias(@Param("busqueda") String busqueda, @Param("idEstudiante") Integer idEstudiante);
+
+    List<Materia> findMateriaByIdEstudianteFk(Integer id);
 }
