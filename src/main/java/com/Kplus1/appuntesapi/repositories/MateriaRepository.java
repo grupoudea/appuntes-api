@@ -20,4 +20,9 @@ public interface MateriaRepository extends JpaRepository<Materia, Integer> {
     List<Materia> filtrarMaterias(@Param("busqueda") String busqueda, @Param("idEstudiante") Integer idEstudiante);
 
     List<Materia> findMateriaByIdEstudianteFk(Integer id);
+    @Query("SELECT m " +
+            "FROM Materia m " +
+            "WHERE m.idEstudianteFk = :idEstudiante " +
+            "AND m.idMateriaFk = :idMateriaFk ")
+    List<Materia> findByIdMateriaFkAndIdEstudianteFk(@Param("idMateriaFk") Integer idMateriaFk, @Param("idEstudiante") Integer idEstudiante);
 }

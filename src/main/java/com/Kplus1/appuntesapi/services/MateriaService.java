@@ -34,6 +34,9 @@ public class MateriaService {
         if (Objects.isNull(materia) || Objects.isNull(materia.getIdMateriaFk()) || Objects.isNull(materia.getIdEstudianteFk())) {
             throw new ObjectNotFoundException(null, "Faltan campos requeridos");
         }
+        if (materiaRepository.findByIdMateriaFkAndIdEstudianteFk(materia.getIdMateriaFk(), materia.getIdEstudianteFk()).size() > 0) {
+            throw new ObjectNotFoundException(null, "La materia ya existe");
+        }
         return materiaMapper.toDto(materiaRepository.save(materiaMapper.toEntity(materia)));
     }
 
@@ -41,6 +44,13 @@ public class MateriaService {
         if (Objects.isNull(materiaDto) || Objects.isNull(materiaDto.getId())) {
             throw new ObjectNotFoundException(null, "Faltan campos requeridos");
         }
+        List<Materia> materiasActuales = materiaRepository
+                .findByIdMateriaFkAndIdEstudianteFk(materiaDto.getIdMateriaFk(), materiaDto.getIdEstudianteFk());
+        boolean isThis = materiasActuales.stream().anyMatch(m -> m.getId().equals(materiaDto.getId()));
+        if (materiasActuales.size() > 0 && !isThis) {
+            throw new ObjectNotFoundException(null, "La materia ya existe");
+        }
+
         Materia materia = buscarMateria(materiaDto.getId());
         materia.setIdMateriaFk(materiaDto.getIdMateriaFk());
         materia.setIdEstudianteFk(materiaDto.getIdEstudianteFk());
@@ -57,6 +67,9 @@ public class MateriaService {
     }
 
     public List<MateriaDto> buscarMateriasPorFiltro(String busqueda, Integer idEstudiante) {
+        if (Objects.isNull(busqueda)) {
+            busqueda = "";
+        }
         return materiaMapper.toDto(materiaRepository.filtrarMaterias(busqueda, idEstudiante));
     }
 

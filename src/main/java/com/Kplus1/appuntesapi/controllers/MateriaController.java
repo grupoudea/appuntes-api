@@ -30,14 +30,9 @@ public class MateriaController {
     }
 
     @GetMapping("/filtro-materias")
-    public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam("busqueda") String busqueda,
+    public ResponseEntity<StandardResponse<List<MateriaDto>>> buscarMateriasPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
                                                                                       @RequestParam("idEstudiante") Integer idEstudiante) {
         return ResponseEntity.ok(new StandardResponse<>(materiaService.buscarMateriasPorFiltro(busqueda, idEstudiante)));
-    }
-
-    @GetMapping("/obtener-materias/{idEstudiante}")
-    public ResponseEntity<StandardResponse<List<MateriaDto>>> obtenerMaterias(@PathVariable("idEstudiante") Integer idEstudiante) {
-        return ResponseEntity.ok(new StandardResponse<>(materiaService.obtenerMateriasPorIdEstudiante(idEstudiante)));
     }
 
     @GetMapping("/filtro-materias-universidad")
@@ -46,7 +41,7 @@ public class MateriaController {
     }
 
     @DeleteMapping("/eliminar-materia-con-apuntes/{idMateria}")
-    public ResponseEntity<StandardResponse<Void>> deleteSubjectWithGrades(@PathVariable("idMateria") Integer idMateria) {
+    public ResponseEntity<StandardResponse<Void>> eliminarMateriaConApuntes(@PathVariable("idMateria") Integer idMateria) {
         materiaService.eliminarMateria(idMateria);
         return ResponseEntity.ok(new StandardResponse<>());
     }
