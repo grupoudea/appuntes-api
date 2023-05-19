@@ -30,4 +30,17 @@ public class ApunteController {
         apunteService.eliminarApunte(idApunte);
         return ResponseEntity.ok(new StandardResponse<>());
     }
+
+    @PostMapping("/crear-grupos-apuntes")
+    public ResponseEntity<StandardResponse> crearGruposApuntes(@RequestBody GrupoApunteDto grupoApunteDto) {
+
+        return ResponseEntity.ok(new StandardResponse());
+    }
+
+    @DeleteMapping("/eliminar-grupos-apuntes/{idGrupoApuntes}")
+    public ResponseEntity<StandardResponse> eliminarGruposApuntes(@PathVariable("idGrupoApuntes") String idGrupoApuntes) {
+
+        return ResponseEntity.ok(new StandardResponse());
+    }
+
 }
