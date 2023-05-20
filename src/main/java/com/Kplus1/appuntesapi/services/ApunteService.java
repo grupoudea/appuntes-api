@@ -2,6 +2,7 @@ package com.Kplus1.appuntesapi.services;
 
 import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
 import com.Kplus1.appuntesapi.entities.Apunte;
+import com.Kplus1.appuntesapi.entities.GrupoApunte;
 import com.Kplus1.appuntesapi.mappers.ApunteMapper;
 import com.Kplus1.appuntesapi.mappers.GrupoApunteMapper;
 import com.Kplus1.appuntesapi.repositories.ApunteRepository;
@@ -47,4 +48,38 @@ public class ApunteService {
         Apunte apunte = buscarApunte(idApunte);
         apunteRepository.delete(apunte);
     }
+
+    public GrupoApunte crearGrupoApunte(GrupoApunteDto grupoApunteDto) {
+        GrupoApunte grupoApunte = grupoApunteMapper.toEntity(grupoApunteDto);
+        return grupoApunteRepository.save(grupoApunte);
+    }
+
+    public void eliminarGrupoApunte(Integer idGrupoApunte) {
+        GrupoApunte grupoApunte = grupoApunteRepository.findById(idGrupoApunte).orElse(null);
+        if (grupoApunte != null) {
+            grupoApunteRepository.delete(grupoApunte);
+        }
+    }
+    public Apunte guardarApunteTexto(String texto) {
+        Apunte apunte = new Apunte();
+        apunte.setTipoContenido("texto");
+        apunte.setContenido(texto);
+        return apunteRepository.save(apunte);
+    }
+
+    public Apunte guardarApunteAudio(String rutaArchivo) {
+        Apunte apunte = new Apunte();
+        apunte.setTipoContenido("audio");
+        apunte.setContenido(rutaArchivo);
+        return apunteRepository.save(apunte);
+    }
+
+    public Apunte guardarApunteFoto(String rutaArchivo) {
+        Apunte apunte = new Apunte();
+        apunte.setTipoContenido("foto");
+        apunte.setContenido(rutaArchivo);
+        return apunteRepository.save(apunte);
+    }
+
+
 }
