@@ -10,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.util.List;
+
+import static com.Kplus1.appuntesapi.services.ApunteService.guardarArchivo;
 
 @RestController
 @RequestMapping("/apuntes")
@@ -72,20 +74,6 @@ public class ApunteController {
         }
     }
 
-    private String guardarArchivo(MultipartFile archivo) throws IOException {
-        // Directorio donde se almacenarán los archivos
-        String directorio = "ruta_del_directorio";
 
-        // Generar un nombre de archivo único
-        String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
-
-        // Ruta completa del archivo a guardar
-        String rutaArchivo = directorio + File.separator + nombreArchivo;
-
-        // Guardar el archivo en el sistema de archivos
-        archivo.transferTo(new File(rutaArchivo));
-
-        return rutaArchivo;
-    }
 
 }

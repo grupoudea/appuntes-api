@@ -9,8 +9,11 @@ import com.Kplus1.appuntesapi.repositories.ApunteRepository;
 import com.Kplus1.appuntesapi.repositories.GrupoApunteRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
@@ -79,6 +82,17 @@ public class ApunteService {
         apunte.setTipoContenido("foto");
         apunte.setContenido(rutaArchivo);
         return apunteRepository.save(apunte);
+    }
+    public static String guardarArchivo(MultipartFile archivo) throws IOException {
+        // Directorio donde se almacenarán los archivos
+        String directorio = "ruta_del_directorio";
+        // Generar un nombre de archivo único
+        String nombreArchivo = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
+        // Ruta completa del archivo a guardar
+        String rutaArchivo = directorio + File.separator + nombreArchivo;
+        // Guardar el archivo en el sistema de archivos
+        archivo.transferTo(new File(rutaArchivo));
+        return rutaArchivo;
     }
 
 
