@@ -38,9 +38,8 @@ public class ApunteController {
     }
 
     @PostMapping("/crear-grupos-apuntes")
-    public ResponseEntity<GrupoApunte> crearGruposApuntes(@RequestBody GrupoApunteDto grupoApunteDto) {
-        GrupoApunte grupoApunte = apunteService.crearGrupoApunte(grupoApunteDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(grupoApunte);
+    public ResponseEntity<StandardResponse<GrupoApunte>> crearGruposApuntes(@RequestBody GrupoApunteDto grupoApunteDto) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.crearGrupoApunte(grupoApunteDto)));
     }
 
     @DeleteMapping("/eliminar-grupos-apuntes/{idGrupoApuntes}")
@@ -50,27 +49,24 @@ public class ApunteController {
     }
 
     @PostMapping("/texto")
-    public ResponseEntity<Apunte> guardarApunteTexto(@RequestBody String texto) {
-        Apunte apunte = apunteService.guardarApunteTexto(texto);
-        return new ResponseEntity<>(apunte, HttpStatus.CREATED);
+    public ResponseEntity<StandardResponse<Apunte>> guardarApunteTexto(@RequestBody String texto) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.guardarApunteTexto(texto)));
     }
 
     @PostMapping("/audio")
-    public ResponseEntity<Apunte> guardarApunteAudio(@RequestParam("archivo") MultipartFile archivo) {
+    public ResponseEntity<StandardResponse<Apunte>> guardarApunteAudio(@RequestParam("archivo") MultipartFile archivo) {
         try {
             String rutaArchivo = guardarArchivo(archivo);
-            Apunte apunte = apunteService.guardarApunteAudio(rutaArchivo);
-            return new ResponseEntity<>(apunte, HttpStatus.CREATED);
+            return ResponseEntity.ok(new StandardResponse<>(apunteService.guardarApunteAudio(rutaArchivo)));
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     @PostMapping("/foto")
-    public ResponseEntity<Apunte> guardarApunteFoto(@RequestParam("archivo") MultipartFile archivo) {
+    public ResponseEntity<StandardResponse<Apunte>> guardarApunteFoto(@RequestParam("archivo") MultipartFile archivo) {
         try {
             String rutaArchivo = guardarArchivo(archivo);
-            Apunte apunte = apunteService.guardarApunteFoto(rutaArchivo);
-            return new ResponseEntity<>(apunte, HttpStatus.CREATED);
+            return ResponseEntity.ok(new StandardResponse<>(apunteService.guardarApunteFoto(rutaArchivo)));
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
