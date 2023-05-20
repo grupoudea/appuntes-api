@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.Kplus1.appuntesapi.utils.Constantes.*;
+
 @Service
 @Transactional
 public class ApunteService {
@@ -65,21 +67,21 @@ public class ApunteService {
     }
     public Apunte guardarApunteTexto(String texto) {
         Apunte apunte = new Apunte();
-        apunte.setTipoContenido("texto");
+        apunte.setTipoContenido(TEXTO);
         apunte.setContenido(texto);
         return apunteRepository.save(apunte);
     }
 
     public Apunte guardarApunteAudio(String rutaArchivo) {
         Apunte apunte = new Apunte();
-        apunte.setTipoContenido("audio");
+        apunte.setTipoContenido(AUDIO);
         apunte.setContenido(rutaArchivo);
         return apunteRepository.save(apunte);
     }
 
     public Apunte guardarApunteFoto(String rutaArchivo) {
         Apunte apunte = new Apunte();
-        apunte.setTipoContenido("foto");
+        apunte.setTipoContenido(FOTO);
         apunte.setContenido(rutaArchivo);
         return apunteRepository.save(apunte);
     }
