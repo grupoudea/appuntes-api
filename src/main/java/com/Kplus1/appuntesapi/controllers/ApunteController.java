@@ -1,6 +1,8 @@
 package com.Kplus1.appuntesapi.controllers;
 
+import com.Kplus1.appuntesapi.dtos.ApunteDto;
 import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
+import com.Kplus1.appuntesapi.dtos.MateriaDto;
 import com.Kplus1.appuntesapi.entities.Apunte;
 import com.Kplus1.appuntesapi.entities.GrupoApunte;
 import com.Kplus1.appuntesapi.services.ApunteService;
@@ -45,14 +47,14 @@ public class ApunteController {
     }
 
     @DeleteMapping("/eliminar-grupos-apuntes/{idGrupoApuntes}")
-    public ResponseEntity<StandardResponse> eliminarGruposApuntes(@PathVariable("idGrupoApuntes") String idGrupoApuntes) {
-
+    public ResponseEntity<StandardResponse> eliminarGruposApuntes(@PathVariable("idGrupoApuntes") int idGrupoApuntes) {
+        apunteService.eliminarGrupoApunte(idGrupoApuntes);
         return ResponseEntity.ok(new StandardResponse());
     }
 
     @PostMapping("/texto")
-    public ResponseEntity<StandardResponse<Apunte>> guardarApunteTexto(@RequestBody String texto) {
-        return ResponseEntity.ok(new StandardResponse<>(apunteService.guardarApunteTexto(texto)));
+    public ResponseEntity<StandardResponse<Apunte>> guardarApunteTexto(@RequestBody ApunteDto apunteDto) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.guardarApunteTexto(apunteDto)));
     }
 
     @PostMapping("/audio")
@@ -72,6 +74,12 @@ public class ApunteController {
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/filtro-apuntes")
+    public ResponseEntity<StandardResponse<List<ApunteDto>>> listarApuntesPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
+                                                                                      @RequestParam("idApunte") Integer idApunte) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.listarApuntesPorFiltro(busqueda, idApunte)));
     }
 
 

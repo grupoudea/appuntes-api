@@ -1,5 +1,6 @@
 package com.Kplus1.appuntesapi.services;
 
+import com.Kplus1.appuntesapi.dtos.ApunteDto;
 import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
 import com.Kplus1.appuntesapi.entities.Apunte;
 import com.Kplus1.appuntesapi.entities.GrupoApunte;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +58,7 @@ public class ApunteService {
 
     public GrupoApunte crearGrupoApunte(GrupoApunteDto grupoApunteDto) {
         GrupoApunte grupoApunte = grupoApunteMapper.toEntity(grupoApunteDto);
+        grupoApunte.setFechaCreacion(LocalDateTime.now());
         return grupoApunteRepository.save(grupoApunte);
     }
 
@@ -65,11 +68,12 @@ public class ApunteService {
             grupoApunteRepository.delete(grupoApunte);
         }
     }
-    public Apunte guardarApunteTexto(String texto) {
-        Apunte apunte = new Apunte();
-        apunte.setTipoContenido(TEXTO);
-        apunte.setContenido(texto);
-        return apunteRepository.save(apunte);
+    public Apunte guardarApunteTexto(ApunteDto apunteDto) {
+
+        apunteDto.setTipoContenido(TEXTO);
+        apunteDto.setFechaCreacion(LocalDateTime.now());
+
+        return apunteRepository.save(apunteMapper.toEntity(apunteDto));
     }
 
     public Apunte guardarApunteAudio(String rutaArchivo) {
@@ -85,6 +89,14 @@ public class ApunteService {
         apunte.setContenido(rutaArchivo);
         return apunteRepository.save(apunte);
     }
+
+    public List<ApunteDto> listarApuntesPorFiltro(String busqueda, Integer idApunte) {
+        if (Objects.isNull(busqueda)) {
+            busqueda = "";
+        }
+        List<Apunte> apuntes = apunteRepository.filtrarApuntes(busqueda, idApunte);
+        return apunteMapper.toDto(apuntes);
+    }
     public static String guardarArchivo(MultipartFile archivo) throws IOException {
         // Directorio donde se almacenarán los archivos
         String directorio = "ruta_del_directorio";
@@ -96,6 +108,7 @@ public class ApunteService {
         archivo.transferTo(new File(rutaArchivo));
         return rutaArchivo;
     }
+
 
 
 }
