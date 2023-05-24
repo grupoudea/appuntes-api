@@ -1,5 +1,6 @@
 package com.Kplus1.appuntesapi.controllers;
 
+import com.Kplus1.appuntesapi.dtos.ApunteDto;
 import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
 import com.Kplus1.appuntesapi.services.ApunteService;
 import com.Kplus1.appuntesapi.utils.StandardResponse;
@@ -23,6 +24,12 @@ public class ApunteController {
                                                                                                @RequestParam("idMateria") Integer idMateria,
                                                                                                @RequestParam("idEstudiante") Integer idEstudiante) {
         return ResponseEntity.ok(new StandardResponse<>(apunteService.buscarGruposApuntesPorFiltro(busqueda, idMateria, idEstudiante)));
+    }
+
+    @GetMapping("/filtro-apuntes")
+    public ResponseEntity<StandardResponse<List<ApunteDto>>> buscarApuntesPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
+                                                                                    @RequestParam("idGrupoApunte") Integer idGrupoApunte) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.buscarApuntesPorFiltro(busqueda, idGrupoApunte)));
     }
 
     @DeleteMapping("/eliminar-apunte/{idApunte}")

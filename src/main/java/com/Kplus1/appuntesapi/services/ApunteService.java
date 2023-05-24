@@ -1,5 +1,6 @@
 package com.Kplus1.appuntesapi.services;
 
+import com.Kplus1.appuntesapi.dtos.ApunteDto;
 import com.Kplus1.appuntesapi.dtos.GrupoApunteDto;
 import com.Kplus1.appuntesapi.entities.Apunte;
 import com.Kplus1.appuntesapi.mappers.ApunteMapper;
@@ -34,6 +35,13 @@ public class ApunteService {
             busqueda = "";
         }
         return grupoApunteMapper.toDto(grupoApunteRepository.filtrarGruposApunte(busqueda, idMateria, idEstudiante));
+    }
+
+    public List<ApunteDto> buscarApuntesPorFiltro(String busqueda, Integer idGrupoApunte) {
+        if (Objects.isNull(busqueda)) {
+            busqueda = "";
+        }
+        return apunteMapper.toDto(apunteRepository.filtrarApuntes(busqueda, idGrupoApunte));
     }
 
     public Apunte buscarApunte(Integer idApunte) {
