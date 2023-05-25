@@ -1,0 +1,53 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:403993234985:task-definition/appuntes-td:4",
+  "containerDefinitions": [
+    {
+      "name": "appuntes-con",
+      "image": "403993234985.dkr.ecr.us-east-1.amazonaws.com/appuntes-app-ecr:c44df36caeec88cb3dff88e5418302e9884e0aeb",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "appuntes-con-8080-tcp",
+          "containerPort": 8080,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "mountPoints": [],
+      "volumesFrom": []
+    }
+  ],
+  "family": "appuntes-td",
+  "executionRoleArn": "arn:aws:iam::403993234985:role/ecsTaskExecutionRole",
+  "networkMode": "bridge",
+  "revision": 4,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2"
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "1024",
+  "memory": "2048",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-05-25T03:20:58.687Z",
+  "registeredBy": "arn:aws:iam::403993234985:user/guillermo.hernandez",
+  "tags": []
+}

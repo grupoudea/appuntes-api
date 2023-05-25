@@ -44,6 +44,13 @@ public class ApunteService {
         return grupoApunteMapper.toDto(grupoApunteRepository.filtrarGruposApunte(busqueda, idMateria, idEstudiante));
     }
 
+    public List<ApunteDto> buscarApuntesPorFiltro(String busqueda, Integer idGrupoApunte) {
+        if (Objects.isNull(busqueda)) {
+            busqueda = "";
+        }
+        return apunteMapper.toDto(apunteRepository.filtrarApuntes(busqueda, idGrupoApunte));
+    }
+
     public Apunte buscarApunte(Integer idApunte) {
         if (Objects.isNull(idApunte)) {
             throw new ObjectNotFoundException(null, "Faltan campos requeridos");

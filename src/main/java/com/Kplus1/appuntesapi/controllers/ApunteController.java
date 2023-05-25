@@ -33,6 +33,12 @@ public class ApunteController {
         return ResponseEntity.ok(new StandardResponse<>(apunteService.buscarGruposApuntesPorFiltro(busqueda, idMateria, idEstudiante)));
     }
 
+    @GetMapping("/filtro-apuntes")
+    public ResponseEntity<StandardResponse<List<ApunteDto>>> buscarApuntesPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
+                                                                                    @RequestParam("idGrupoApunte") Integer idGrupoApunte) {
+        return ResponseEntity.ok(new StandardResponse<>(apunteService.buscarApuntesPorFiltro(busqueda, idGrupoApunte)));
+    }
+
     @DeleteMapping("/eliminar-apunte/{idApunte}")
     public ResponseEntity<StandardResponse<Void>> elminarApunte(@PathVariable("idApunte") Integer idApunte) {
         apunteService.eliminarApunte(idApunte);

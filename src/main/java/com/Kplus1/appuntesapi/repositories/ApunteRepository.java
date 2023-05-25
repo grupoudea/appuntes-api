@@ -12,18 +12,10 @@ import java.util.List;
 @Repository
 public interface ApunteRepository extends JpaRepository<Apunte, Integer> {
 
-
     @Query("SELECT a " +
             "FROM Apunte a " +
-            "WHERE a.id = :idApunte " +
-            "AND ((a.tipoContenido LIKE concat('%', :busqueda, '%')) " +
-            "OR (a.contenido LIKE concat('%', :busqueda, '%'))) ")
-    List<Apunte> filtrarApuntes(@Param("busqueda") String busqueda, @Param("idApunte") Integer idApunte);
-
-    @Query("SELECT a " +
-            "FROM Apunte a " +
-            "WHERE a.tipoContenido = :tipoContenido " +
-            "AND a.id = :idApunte ")
-    List<Apunte> findByIdApunteAndTipoContenido(@Param("idApunte") Integer idApunte, @Param("tipoContenido") String tipoContenido);
+            "WHERE a.idGrupoApunte = :idGrupoApunte " +
+            "AND a.contenido LIKE concat('%', :busqueda, '%') ")
+    List<Apunte> filtrarApuntes(@Param("busqueda") String busqueda, @Param("idGrupoApunte") Integer idGrupoApunte);
 }
 
