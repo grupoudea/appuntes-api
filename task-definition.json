@@ -1,15 +1,15 @@
 {
-  "taskDefinitionArn": "arn:aws:ecs:us-east-1:403993234985:task-definition/appuntes-td:4",
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:403993234985:task-definition/appuntes-td:6",
   "containerDefinitions": [
     {
       "name": "appuntes-con",
-      "image": "403993234985.dkr.ecr.us-east-1.amazonaws.com/appuntes-app-ecr:c44df36caeec88cb3dff88e5418302e9884e0aeb",
+      "image": "403993234985.dkr.ecr.us-east-1.amazonaws.com/appuntes-app-ecr:592cd1bb4603b1807b81e320b16cdc9b4a48c9a7",
       "cpu": 0,
       "portMappings": [
         {
           "name": "appuntes-con-8080-tcp",
           "containerPort": 8080,
-          "hostPort": 0,
+          "hostPort": 80,
           "protocol": "tcp",
           "appProtocol": "http"
         }
@@ -23,7 +23,7 @@
   "family": "appuntes-td",
   "executionRoleArn": "arn:aws:iam::403993234985:role/ecsTaskExecutionRole",
   "networkMode": "bridge",
-  "revision": 4,
+  "revision": 6,
   "volumes": [],
   "status": "ACTIVE",
   "requiresAttributes": [
@@ -47,7 +47,7 @@
     "cpuArchitecture": "X86_64",
     "operatingSystemFamily": "LINUX"
   },
-  "registeredAt": "2023-05-25T03:20:58.687Z",
+  "registeredAt": "2023-05-25T04:22:10.135Z",
   "registeredBy": "arn:aws:iam::403993234985:user/guillermo.hernandez",
   "tags": []
 }

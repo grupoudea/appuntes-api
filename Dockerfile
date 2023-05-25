@@ -6,6 +6,7 @@ ARG USER_DB
 
 ENV PASS_DB=${PASS_DB}
 ENV USER_DB=${USER_DB}
+CMD echo "El valor de PASS_DB es: $PASS_DB" && echo "El valor de USER_DB es: $USER_DB"
 
 
 WORKDIR /opt/app
