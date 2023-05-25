@@ -1,0 +1,58 @@
+{
+  "taskDefinitionArn": "arn:aws:ecs:us-east-1:403993234985:task-definition/appuntes-td:2",
+  "containerDefinitions": [
+    {
+      "name": "appuntes-con",
+      "image": "403993234985.dkr.ecr.us-east-1.amazonaws.com/appuntes-app-ecr",
+      "cpu": 0,
+      "portMappings": [
+        {
+          "name": "appuntes-con-8080-tcp",
+          "containerPort": 8080,
+          "hostPort": 0,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "essential": true,
+      "environment": [],
+      "environmentFiles": [],
+      "mountPoints": [],
+      "volumesFrom": [],
+      "ulimits": []
+    }
+  ],
+  "family": "appuntes-td",
+  "executionRoleArn": "arn:aws:iam::403993234985:role/ecsTaskExecutionRole",
+  "networkMode": "bridge",
+  "revision": 2,
+  "volumes": [],
+  "status": "ACTIVE",
+  "requiresAttributes": [
+    {
+      "name": "com.amazonaws.ecs.capability.ecr-auth"
+    },
+    {
+      "name": "ecs.capability.execution-role-ecr-pull"
+    },
+    {
+      "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+    }
+  ],
+  "placementConstraints": [],
+  "compatibilities": [
+    "EC2"
+  ],
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "1024",
+  "memory": "1024",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "registeredAt": "2023-05-25T01:32:19.000Z",
+  "registeredBy": "arn:aws:iam::403993234985:user/guillermo.hernandez",
+  "tags": []
+}
