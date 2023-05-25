@@ -76,11 +76,7 @@ public class ApunteController {
         }
     }
 
-    @GetMapping("/filtro-apuntes")
-    public ResponseEntity<StandardResponse<List<ApunteDto>>> listarApuntesPorFiltro(@RequestParam(value = "busqueda", required = false) String busqueda,
-                                                                                      @RequestParam("idApunte") Integer idApunte) {
-        return ResponseEntity.ok(new StandardResponse<>(apunteService.listarApuntesPorFiltro(busqueda, idApunte)));
-    }
+
 
 
 

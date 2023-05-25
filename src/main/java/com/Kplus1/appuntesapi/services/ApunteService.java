@@ -90,13 +90,7 @@ public class ApunteService {
         return apunteRepository.save(apunte);
     }
 
-    public List<ApunteDto> listarApuntesPorFiltro(String busqueda, Integer ) {
-        if (Objects.isNull(busqueda)) {idApunte
-            busqueda = "";
-        }
-        List<Apunte> apuntes = apunteRepository.filtrarApuntes(busqueda, idApunte);
-        return apunteMapper.toDto(apuntes);
-    }
+
     public static String guardarArchivo(MultipartFile archivo) throws IOException {
         // Directorio donde se almacenarán los archivos
         String directorio = "ruta_del_directorio";
