@@ -90,8 +90,8 @@ public class ApunteService {
         return apunteRepository.save(apunte);
     }
 
-    public List<ApunteDto> listarApuntesPorFiltro(String busqueda, Integer idApunte) {
-        if (Objects.isNull(busqueda)) {
+    public List<ApunteDto> listarApuntesPorFiltro(String busqueda, Integer ) {
+        if (Objects.isNull(busqueda)) {idApunte
             busqueda = "";
         }
         List<Apunte> apuntes = apunteRepository.filtrarApuntes(busqueda, idApunte);
