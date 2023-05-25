@@ -68,11 +68,10 @@ public class ApunteService {
             grupoApunteRepository.delete(grupoApunte);
         }
     }
-    public Apunte guardarApunteTexto(ApunteDto apunteDto) {
 
+    public Apunte guardarApunteTexto(ApunteDto apunteDto) {
         apunteDto.setTipoContenido(TEXTO);
         apunteDto.setFechaCreacion(LocalDateTime.now());
-
         return apunteRepository.save(apunteMapper.toEntity(apunteDto));
     }
 
@@ -90,7 +89,6 @@ public class ApunteService {
         return apunteRepository.save(apunte);
     }
 
-
     public static String guardarArchivo(MultipartFile archivo) throws IOException {
         // Directorio donde se almacenarán los archivos
         String directorio = "ruta_del_directorio";
@@ -102,7 +100,4 @@ public class ApunteService {
         archivo.transferTo(new File(rutaArchivo));
         return rutaArchivo;
     }
-
-
-
 }
