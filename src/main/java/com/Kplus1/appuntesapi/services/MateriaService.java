@@ -3,6 +3,7 @@ package com.Kplus1.appuntesapi.services;
 import com.Kplus1.appuntesapi.dtos.MateriaDto;
 import com.Kplus1.appuntesapi.dtos.MateriaUniversidadDto;
 import com.Kplus1.appuntesapi.entities.Materia;
+import com.Kplus1.appuntesapi.entities.MateriaUniversidad;
 import com.Kplus1.appuntesapi.mappers.MateriaMapper;
 import com.Kplus1.appuntesapi.mappers.MateriaUniversidadMapper;
 import com.Kplus1.appuntesapi.repositories.MateriaRepository;
@@ -37,7 +38,11 @@ public class MateriaService {
         if (materiaRepository.findByIdMateriaFkAndIdEstudianteFk(materia.getIdMateriaFk(), materia.getIdEstudianteFk()).size() > 0) {
             throw new ObjectNotFoundException(null, "La materia ya existe");
         }
-        return materiaMapper.toDto(materiaRepository.save(materiaMapper.toEntity(materia)));
+        var materiaEntity = materiaRepository.save(materiaMapper.toEntity(materia));
+        var materiaUniversidad =  materiaUniversidadRepository.findById(materiaEntity.getIdMateriaFk()).orElse(new MateriaUniversidad());
+        materiaEntity.setMateriaUniversidad(materiaUniversidad);
+
+        return materiaMapper.toDto(materiaEntity);
     }
 
     public MateriaDto editarMateria(MateriaDto materiaDto) {
@@ -67,6 +72,12 @@ public class MateriaService {
     }
 
     public List<MateriaDto> buscarMateriasPorFiltro(String busqueda, Integer idEstudiante) {
+
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (Objects.isNull(busqueda)) {
             busqueda = "";
         }
